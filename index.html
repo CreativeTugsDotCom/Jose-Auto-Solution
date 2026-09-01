@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jose Auto Solution | Professional Auto Repair in The Bronx, NY</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0c10;
+            color: #f5f5f7;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c38 100%);
+        }
+        .text-accent {
+            color: #ff6b00;
+        }
+        .border-accent {
+            border-color: #ff6b00;
+        }
+        .bg-surface {
+            background-color: #12141c;
+        }
+        .bg-surface-card {
+            background-color: #1a1d26;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0c10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2e3d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6b00;
+        }
+    </style>
+</head>
+<body class="bg-[#0b0c10] text-[#f5f5f7] antialiased selection:bg-[#ff6b00] selection:text-white">
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-[#1a1d26] border border-neutral-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="w-12 h-12 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/30 flex items-center justify-center text-[#ff6b00] mb-4">
+                <i data-lucide="check-circle" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold font-heading mb-2" id="modal-title">Request Received!</h3>
+            <p class="text-neutral-400 text-sm mb-6" id="modal-message">Thank you for reaching out to Jose Auto Solution. We will review your request and call you shortly to confirm your appointment.</p>
+            <button onclick="closeModal()" class="w-full py-3 bg-[#ff6b00] hover:bg-[#e05d00] text-white font-medium rounded-xl transition-colors shadow-lg shadow-[#ff6b00]/20">
+                Got It
+            </button>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-[#0b0c10]/90 backdrop-blur-md border-b border-neutral-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#ff6b00] to-[#cc5500] flex items-center justify-center text-white shadow-lg shadow-[#ff6b00]/20 group-hover:scale-105 transition-transform">
+                    <i data-lucide="wrench" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <span class="font-heading font-bold text-lg sm:text-xl tracking-tight text-white block leading-tight">JOSE AUTO SOLUTION</span>
+                    <span class="text-[10px] uppercase tracking-widest text-neutral-400 font-medium">The Bronx, NY</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#home" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">Home</a>
+                <a href="#about" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">About</a>
+                <a href="#services" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">Services</a>
+                <a href="#process" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">Process</a>
+                <a href="#why-us" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">Why Us</a>
+                <a href="#reviews" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">Reviews</a>
+                <a href="#contact" class="text-sm font-medium text-neutral-300 hover:text-[#ff6b00] transition-colors">Contact</a>
+            </nav>
+
+            <!-- Right CTA -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="tel:6462874848" class="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#ff6b00] to-[#e05d00] hover:from-[#ff7c1a] hover:to-[#f06400] text-white font-medium text-sm shadow-lg shadow-[#ff6b00]/25 transition-all duration-300 hover:scale-[1.02]">
+                    <i data-lucide="phone-call" class="w-4 h-4"></i>
+                    <span>646-287-4848</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white transition-colors">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-[#12141c] border-b border-neutral-800 px-6 py-6 space-y-4 animate-fadeIn">
+            <nav class="flex flex-col space-y-3">
+                <a href="#home" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2 border-b border-neutral-800/50">Home</a>
+                <a href="#about" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2 border-b border-neutral-800/50">About</a>
+                <a href="#services" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2 border-b border-neutral-800/50">Services</a>
+                <a href="#process" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2 border-b border-neutral-800/50">Process</a>
+                <a href="#why-us" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2 border-b border-neutral-800/50">Why Us</a>
+                <a href="#reviews" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2 border-b border-neutral-800/50">Reviews</a>
+                <a href="#contact" class="mobile-link text-neutral-300 hover:text-[#ff6b00] font-medium py-2">Contact</a>
+            </nav>
+            <div class="pt-2">
+                <a href="tel:6462874848" class="flex items-center justify-center gap-3 w-full py-3 bg-[#ff6b00] text-white font-medium rounded-xl shadow-lg">
+                    <i data-lucide="phone-call" class="w-4 h-4"></i>
+                    <span>Call Now: 646-287-4848</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="home">
+        <!-- Hero Section -->
+        <section class="relative min-h-[92vh] pt-32 pb-20 flex items-center overflow-hidden bg-[#0b0c10]">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=2000&q=80" alt="Professional Mechanic Garage" class="w-full h-full object-cover object-center opacity-25 scale-105 animate-pulse duration-[10000ms]">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#0b0c10] via-[#0b0c10]/90 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0b0c10] via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Subtle Grid Pattern -->
+            <div class="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(#ff6b00_1px,transparent_1px)] [background-size:32px_32px]"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-8 space-y-8">
+                        <!-- Floating Service Badge -->
+                        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1a1d26] border border-neutral-800 shadow-xl">
+                            <span class="w-2 h-2 rounded-full bg-[#ff6b00] animate-ping"></span>
+                            <span class="text-xs font-semibold uppercase tracking-widest text-[#ff6b00]">LOCAL AUTO REPAIR • THE BRONX, NY</span>
+                        </div>
+
+                        <!-- Headline -->
+                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold font-heading tracking-tight leading-[1.08] text-white">
+                            Reliable Auto Care.<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b00] to-[#ff9e57]">Done Right the First Time.</span>
+                        </h1>
+
+                        <!-- Supporting Text -->
+                        <p class="text-lg sm:text-xl text-neutral-300 max-w-2xl font-normal leading-relaxed">
+                            Professional auto repair and maintenance in The Bronx, NY — from routine oil changes to brakes, electrical work, inspections, and more.
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                            <a href="tel:6462874848" class="flex items-center justify-center gap-3 px-8 py-4 rounded-xl accent-gradient hover:opacity-95 text-white font-semibold text-base shadow-xl shadow-[#ff6b00]/30 transition-all duration-300 hover:scale-[1.02]">
+                                <i data-lucide="phone-call" class="w-5 h-5"></i>
+                                <span>CALL NOW — (646) 287-4848</span>
+                            </a>
+                            <a href="#services" class="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#1a1d26] hover:bg-[#222633] text-white font-semibold text-base border border-neutral-800 transition-all duration-300 hover:border-neutral-700">
+                                <span>VIEW SERVICES</span>
+                                <i data-lucide="arrow-down" class="w-4 h-4 text-[#ff6b00]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Trust Line -->
+                        <div class="pt-4 flex flex-wrap items-center gap-6 text-sm text-neutral-400 font-medium">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-[#ff6b00]"></i>
+                                <span>Quality Service</span>
+                            </div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-neutral-800 hidden sm:block"></div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-[#ff6b00]"></i>
+                                <span>Affordable Pricing</span>
+                            </div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-neutral-800 hidden sm:block"></div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-[#ff6b00]"></i>
+                                <span>Customer-Focused Care</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust / Quick Stats Strip -->
+        <section class="border-y border-neutral-800/80 bg-[#12141c]/80 backdrop-blur-md relative z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-neutral-800">
+                    <div class="flex flex-col items-center justify-center p-2">
+                        <div class="flex items-center gap-1.5 text-amber-400 mb-1">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <span class="font-heading font-bold text-2xl text-white">5.0★</span>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-neutral-400 font-medium">Google Rating</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-2 pt-4 md:pt-2">
+                        <div class="flex items-center gap-2 text-[#ff6b00] mb-1">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            <span class="font-heading font-bold text-xl text-white">The Bronx, NY</span>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-neutral-400 font-medium">Local Repair Shop</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-2 pt-4 md:pt-2">
+                        <div class="flex items-center gap-2 text-[#ff6b00] mb-1">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            <span class="font-heading font-bold text-xl text-white">Quality-Focused</span>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-neutral-400 font-medium">Professional Service</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-2 pt-4 md:pt-2">
+                        <div class="flex items-center gap-2 text-[#ff6b00] mb-1">
+                            <i data-lucide="tag" class="w-5 h-5"></i>
+                            <span class="font-heading font-bold text-xl text-white">Fair & Honest</span>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-neutral-400 font-medium">Affordable Auto Care</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 bg-[#0b0c10] relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    <!-- Left Image Column -->
+                    <div class="lg:col-span-6 relative">
+                        <div class="relative rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl group">
+                            <img src="https://images.unsplash.com/photo-1517524204227-4ed27bbab7ee?auto=format&fit=crop&w=1000&q=80" alt="Mechanic inspecting vehicle" class="w-full h-[450px] sm:h-[520px] object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0c10]/80 via-transparent to-transparent"></div>
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-6 left-6 right-6 bg-[#12141c]/90 backdrop-blur-md border border-neutral-800 p-4 rounded-xl flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-[#ff6b00]/10 border border-[#ff6b00]/30 flex items-center justify-center text-[#ff6b00] shrink-0">
+                                    <i data-lucide="award" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white text-base">CUSTOMER-FIRST SERVICE</h4>
+                                    <p class="text-xs text-neutral-400">Dedicated professionals committed to honest diagnostics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Text Column -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                            ABOUT JOSE AUTO SOLUTION
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white leading-tight">
+                            Your Vehicle Deserves Reliable Care.
+                        </h2>
+                        <p class="text-neutral-300 text-base sm:text-lg leading-relaxed font-normal">
+                            Jose Auto Solution is a trusted auto repair and maintenance service serving drivers in The Bronx. Our focus is simple: provide knowledgeable automotive service, quality workmanship, and affordable solutions while putting customer satisfaction first.
+                        </p>
+                        <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                            Whether you need a quick oil change, brake adjustments, or complex diagnostic work, we treat every vehicle with the exact attention to detail and care it requires to keep you safe on the road.
+                        </p>
+                        <div class="pt-4">
+                            <a href="tel:6462874848" class="inline-flex items-center gap-3 text-[#ff6b00] font-semibold hover:text-white transition-colors group">
+                                <span>TALK TO OUR TEAM</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-[#12141c] border-y border-neutral-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                        OUR EXPERT CAPABILITIES
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                        AUTOMOTIVE SERVICES BUILT AROUND YOUR NEEDS
+                    </h2>
+                    <p class="text-neutral-400 text-base sm:text-lg">
+                        From routine maintenance to essential repairs, Jose Auto Solution is ready to help keep your vehicle running safely and reliably.
+                    </p>
+                </div>
+
+                <!-- 6 Service Cards Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 01 -->
+                    <div class="bg-[#1a1d26] border border-neutral-800 hover:border-[#ff6b00]/50 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-14 h-14 rounded-xl bg-[#0b0c10] border border-neutral-800 group-hover:border-[#ff6b00]/40 flex items-center justify-center text-[#ff6b00] transition-colors">
+                                    <i data-lucide="disc" class="w-7 h-7"></i>
+                                </div>
+                                <span class="font-heading font-bold text-neutral-600 text-2xl group-hover:text-[#ff6b00]/40 transition-colors">01</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Brake Service</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                                Professional brake inspection and brake replacement to help keep your vehicle safe and responsive.
+                            </p>
+                        </div>
+                        <a href="#contact" onclick="selectService('Brake Service')" class="inline-flex items-center gap-2 text-[#ff6b00] font-semibold text-sm hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                            <span>GET BRAKE SERVICE</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="bg-[#1a1d26] border border-neutral-800 hover:border-[#ff6b00]/50 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-14 h-14 rounded-xl bg-[#0b0c10] border border-neutral-800 group-hover:border-[#ff6b00]/40 flex items-center justify-center text-[#ff6b00] transition-colors">
+                                    <i data-lucide="droplet" class="w-7 h-7"></i>
+                                </div>
+                                <span class="font-heading font-bold text-neutral-600 text-2xl group-hover:text-[#ff6b00]/40 transition-colors">02</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Oil Change</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                                Fast and dependable oil change service designed to help maintain engine performance.
+                            </p>
+                        </div>
+                        <a href="#contact" onclick="selectService('Oil Change')" class="inline-flex items-center gap-2 text-[#ff6b00] font-semibold text-sm hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                            <span>BOOK AN OIL CHANGE</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="bg-[#1a1d26] border border-neutral-800 hover:border-[#ff6b00]/50 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-14 h-14 rounded-xl bg-[#0b0c10] border border-neutral-800 group-hover:border-[#ff6b00]/40 flex items-center justify-center text-[#ff6b00] transition-colors">
+                                    <i data-lucide="wrench" class="w-7 h-7"></i>
+                                </div>
+                                <span class="font-heading font-bold text-neutral-600 text-2xl group-hover:text-[#ff6b00]/40 transition-colors">03</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Auto Repair</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                                Reliable repair solutions for everyday automotive problems and maintenance needs.
+                            </p>
+                        </div>
+                        <a href="#contact" onclick="selectService('Auto Repair')" class="inline-flex items-center gap-2 text-[#ff6b00] font-semibold text-sm hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                            <span>REQUEST REPAIR</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="bg-[#1a1d26] border border-neutral-800 hover:border-[#ff6b00]/50 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-14 h-14 rounded-xl bg-[#0b0c10] border border-neutral-800 group-hover:border-[#ff6b00]/40 flex items-center justify-center text-[#ff6b00] transition-colors">
+                                    <i data-lucide="file-text" class="w-7 h-7"></i>
+                                </div>
+                                <span class="font-heading font-bold text-neutral-600 text-2xl group-hover:text-[#ff6b00]/40 transition-colors">04</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Emissions Inspection</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                                Convenient emissions inspection services to help keep your vehicle compliant.
+                            </p>
+                        </div>
+                        <a href="#contact" onclick="selectService('Emissions Inspection')" class="inline-flex items-center gap-2 text-[#ff6b00] font-semibold text-sm hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                            <span>ASK ABOUT INSPECTIONS</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service 05 -->
+                    <div class="bg-[#1a1d26] border border-neutral-800 hover:border-[#ff6b00]/50 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-14 h-14 rounded-xl bg-[#0b0c10] border border-neutral-800 group-hover:border-[#ff6b00]/40 flex items-center justify-center text-[#ff6b00] transition-colors">
+                                    <i data-lucide="zap" class="w-7 h-7"></i>
+                                </div>
+                                <span class="font-heading font-bold text-neutral-600 text-2xl group-hover:text-[#ff6b00]/40 transition-colors">05</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Electrical Services</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                                Professional assistance with vehicle electrical issues, diagnostics, and related problems.
+                            </p>
+                        </div>
+                        <a href="#contact" onclick="selectService('Electrical Issue')" class="inline-flex items-center gap-2 text-[#ff6b00] font-semibold text-sm hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                            <span>GET ELECTRICAL HELP</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Service 06 -->
+                    <div class="bg-[#1a1d26] border border-neutral-800 hover:border-[#ff6b00]/50 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-14 h-14 rounded-xl bg-[#0b0c10] border border-neutral-800 group-hover:border-[#ff6b00]/40 flex items-center justify-center text-[#ff6b00] transition-colors">
+                                    <i data-lucide="settings" class="w-7 h-7"></i>
+                                </div>
+                                <span class="font-heading font-bold text-neutral-600 text-2xl group-hover:text-[#ff6b00]/40 transition-colors">06</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">General Maintenance</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                                Essential maintenance services designed to keep your vehicle performing reliably.
+                            </p>
+                        </div>
+                        <a href="#contact" onclick="selectService('General Maintenance')" class="inline-flex items-center gap-2 text-[#ff6b00] font-semibold text-sm hover:text-white transition-colors group-hover:translate-x-1 duration-300">
+                            <span>SCHEDULE SERVICE</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Process Section -->
+        <section id="process" class="py-24 bg-[#0b0c10]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                        SIMPLE & TRANSPARENT
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                        AUTO CARE WITHOUT THE RUNAROUND
+                    </h2>
+                </div>
+
+                <!-- 3 Step Horizontal Grid -->
+                <div class="grid md:grid-cols-3 gap-8 relative">
+                    <!-- Step 01 -->
+                    <div class="bg-[#12141c] border border-neutral-800 rounded-2xl p-8 relative flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-full accent-gradient text-white flex items-center justify-center font-heading font-bold text-lg mb-6 shadow-lg shadow-[#ff6b00]/20">
+                                01
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Tell Us What's Wrong</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed">
+                                Contact Jose Auto Solution and explain what your vehicle needs or describe any unusual sounds and symptoms.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 02 -->
+                    <div class="bg-[#12141c] border border-neutral-800 rounded-2xl p-8 relative flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-full accent-gradient text-white flex items-center justify-center font-heading font-bold text-lg mb-6 shadow-lg shadow-[#ff6b00]/20">
+                                02
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Get Professional Service</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed">
+                                Our experienced team identifies the root issue and provides the appropriate repair or routine maintenance.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 03 -->
+                    <div class="bg-[#12141c] border border-neutral-800 rounded-2xl p-8 relative flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-full accent-gradient text-white flex items-center justify-center font-heading font-bold text-lg mb-6 shadow-lg shadow-[#ff6b00]/20">
+                                03
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-white mb-3">Get Back on the Road</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed">
+                                Receive dependable service focused on getting your vehicle running safely and properly again.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="py-24 bg-[#12141c] border-y border-neutral-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    <!-- Left Benefits List -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                            THE JOSE AUTO ADVANTAGE
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                            WHY BRONX DRIVERS CHOOSE JOSE AUTO SOLUTION
+                        </h2>
+
+                        <!-- 5 Benefits -->
+                        <div class="space-y-4 pt-4">
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80">
+                                <div class="w-8 h-8 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00] font-heading font-bold shrink-0 mt-0.5">01</div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white text-base">Quality-Focused Work</h4>
+                                    <p class="text-neutral-400 text-sm">We take pride in providing dependable automotive service.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80">
+                                <div class="w-8 h-8 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00] font-heading font-bold shrink-0 mt-0.5">02</div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white text-base">Affordable Service</h4>
+                                    <p class="text-neutral-400 text-sm">Professional vehicle care without unnecessary complexity or hidden fees.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80">
+                                <div class="w-8 h-8 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00] font-heading font-bold shrink-0 mt-0.5">03</div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white text-base">Customer Satisfaction</h4>
+                                    <p class="text-neutral-400 text-sm">Your experience matters from the moment you contact us.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80">
+                                <div class="w-8 h-8 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00] font-heading font-bold shrink-0 mt-0.5">04</div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white text-base">Skilled Automotive Service</h4>
+                                    <p class="text-neutral-400 text-sm">From maintenance to repairs, we handle a wide range of vehicle needs.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80">
+                                <div class="w-8 h-8 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00] font-heading font-bold shrink-0 mt-0.5">05</div>
+                                <div>
+                                    <h4 class="font-heading font-bold text-white text-base">Convenient Local Service</h4>
+                                    <p class="text-neutral-400 text-sm">A trusted neighborhood option for drivers throughout The Bronx.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="tel:6462874848" class="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl accent-gradient text-white font-semibold text-sm shadow-lg shadow-[#ff6b00]/20 hover:scale-[1.02] transition-transform">
+                                <i data-lucide="phone-call" class="w-4 h-4"></i>
+                                <span>CALL JOSE AUTO SOLUTION</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Image Column -->
+                    <div class="lg:col-span-5">
+                        <div class="relative rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80" alt="Advanced mechanic service" class="w-full h-[580px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#12141c] via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Review / Testimonial Section -->
+        <section id="reviews" class="py-24 bg-[#0b0c10]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                        VERIFIED REPUTATION
+                    </div>
+                    <div class="flex items-center justify-center gap-2 text-amber-400 mb-2">
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                        <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                        DRIVERS TRUST OUR SERVICE
+                    </h2>
+                    <p class="text-neutral-400 text-sm">
+                        Maintaining a 5.0★ Google Rating through dedication and honest customer service.
+                    </p>
+                </div>
+
+                <!-- 3 Testimonial Cards (Placeholders as requested) -->
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <!-- Review 1 -->
+                    <div class="bg-[#12141c] border border-neutral-800 rounded-2xl p-8 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 mb-4">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <p class="text-neutral-300 text-sm italic mb-6 leading-relaxed">
+                                “Verified customer review goes here. Exceptional experience and professional work on my vehicle.”
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-neutral-800/80">
+                            <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-[#ff6b00]">G</div>
+                            <div>
+                                <h5 class="font-heading font-semibold text-white text-sm">Google Customer</h5>
+                                <span class="text-xs text-neutral-500">Verified Local Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-[#12141c] border border-neutral-800 rounded-2xl p-8 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 mb-4">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <p class="text-neutral-300 text-sm italic mb-6 leading-relaxed">
+                                “Verified customer review goes here. Fast turn-around and straightforward communication.”
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-neutral-800/80">
+                            <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-[#ff6b00]">G</div>
+                            <div>
+                                <h5 class="font-heading font-semibold text-white text-sm">Google Customer</h5>
+                                <span class="text-xs text-neutral-500">Verified Local Review</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-[#12141c] border border-neutral-800 rounded-2xl p-8 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 mb-4">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <p class="text-neutral-300 text-sm italic mb-6 leading-relaxed">
+                                “Verified customer review goes here. Extremely reliable mechanic shop right here in The Bronx.”
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-neutral-800/80">
+                            <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-[#ff6b00]">G</div>
+                            <div>
+                                <h5 class="font-heading font-semibold text-white text-sm">Google Customer</h5>
+                                <span class="text-xs text-neutral-500">Verified Local Review</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="https://google.com" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#12141c] hover:bg-[#1a1d26] text-white font-medium text-sm border border-neutral-800 transition-all">
+                        <span>SEE MORE REVIEWS</span>
+                        <i data-lucide="external-link" class="w-4 h-4 text-[#ff6b00]"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mid-Page CTA -->
+        <section class="py-20 bg-gradient-to-r from-[#12141c] via-[#1a1d26] to-[#12141c] border-y border-neutral-800 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ff6b00_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+                <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                    Is Your Vehicle Due for Service?
+                </h2>
+                <p class="text-neutral-300 text-base sm:text-lg max-w-2xl mx-auto">
+                    Don't wait until a small issue becomes a bigger problem. Contact Jose Auto Solution today.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <a href="tel:6462874848" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl accent-gradient text-white font-semibold shadow-xl shadow-[#ff6b00]/30 hover:scale-[1.02] transition-transform">
+                        <i data-lucide="phone-call" class="w-5 h-5"></i>
+                        <span>CALL (646) 287-4848</span>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#0b0c10] hover:bg-neutral-900 text-white font-semibold border border-neutral-800 transition-colors">
+                        <span>GET DIRECTIONS & CONTACT</span>
+                    </a>
+                </div>
+                <p class="text-xs text-neutral-400 uppercase tracking-widest pt-2">Serving Drivers in The Bronx, NY</p>
+            </div>
+        </section>
+
+        <!-- Contact Section & Form -->
+        <section id="contact" class="py-24 bg-[#0b0c10]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                        GET IN TOUCH
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                        LET'S GET YOUR VEHICLE BACK ON TRACK
+                    </h2>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                    <!-- Left Info Side -->
+                    <div class="lg:col-span-5 bg-[#12141c] border border-neutral-800 rounded-2xl p-8 space-y-8 shadow-xl">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">Jose Auto Solution</h3>
+                            <p class="text-neutral-400 text-sm">Professional Car Repair & Maintenance Service located in The Bronx, NY.</p>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <a href="tel:6462874848" class="flex items-center gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80 hover:border-[#ff6b00]/50 transition-colors group">
+                                <div class="w-10 h-10 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00] group-hover:scale-110 transition-transform">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-neutral-500 uppercase tracking-wider block">Call Us Direct</span>
+                                    <span class="font-heading font-bold text-white text-base">646-287-4848</span>
+                                </div>
+                            </a>
+
+                            <div class="flex items-center gap-4 p-4 rounded-xl bg-[#1a1d26] border border-neutral-800/80">
+                                <div class="w-10 h-10 rounded-lg bg-[#ff6b00]/10 flex items-center justify-center text-[#ff6b00]">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-neutral-500 uppercase tracking-wider block">Location</span>
+                                    <span class="font-heading font-bold text-white text-base">The Bronx, NY</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-heading font-bold text-white text-sm uppercase tracking-wider mb-4">Core Services</h4>
+                            <div class="grid grid-cols-2 gap-2.5 text-sm text-neutral-400">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#ff6b00]"></i>
+                                    <span>Brake Service</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#ff6b00]"></i>
+                                    <span>Oil Changes</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#ff6b00]"></i>
+                                    <span>Auto Repair</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#ff6b00]"></i>
+                                    <span>Emissions Inspection</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#ff6b00]"></i>
+                                    <span>Electrical Services</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-[#ff6b00]"></i>
+                                    <span>General Maintenance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Form Side -->
+                    <div class="lg:col-span-7 bg-[#12141c] border border-neutral-800 rounded-2xl p-8 sm:p-10 shadow-xl">
+                        <form id="service-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="name" class="block text-xs uppercase tracking-wider font-semibold text-neutral-400">Your Name *</label>
+                                    <input type="text" id="name" required class="w-full bg-[#1a1d26] border border-neutral-800 focus:border-[#ff6b00] text-white px-4 py-3 rounded-xl outline-none transition-colors text-sm" placeholder="John Doe">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="phone" class="block text-xs uppercase tracking-wider font-semibold text-neutral-400">Phone Number *</label>
+                                    <input type="tel" id="phone" required class="w-full bg-[#1a1d26] border border-neutral-800 focus:border-[#ff6b00] text-white px-4 py-3 rounded-xl outline-none transition-colors text-sm" placeholder="(646) 000-0000">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="vehicle" class="block text-xs uppercase tracking-wider font-semibold text-neutral-400">Vehicle / Model (Year, Make, Model)</label>
+                                <input type="text" id="vehicle" class="w-full bg-[#1a1d26] border border-neutral-800 focus:border-[#ff6b00] text-white px-4 py-3 rounded-xl outline-none transition-colors text-sm" placeholder="e.g., 2018 Toyota Camry">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="service-need" class="block text-xs uppercase tracking-wider font-semibold text-neutral-400">What does your vehicle need? *</label>
+                                <select id="service-need" required class="w-full bg-[#1a1d26] border border-neutral-800 focus:border-[#ff6b00] text-white px-4 py-3 rounded-xl outline-none transition-colors text-sm">
+                                    <option value="" disabled selected>Select service category</option>
+                                    <option value="Brake Service">Brake Service</option>
+                                    <option value="Oil Change">Oil Change</option>
+                                    <option value="Auto Repair">Auto Repair</option>
+                                    <option value="Emissions Inspection">Emissions Inspection</option>
+                                    <option value="Electrical Issue">Electrical Issue</option>
+                                    <option value="General Maintenance">General Maintenance</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="message" class="block text-xs uppercase tracking-wider font-semibold text-neutral-400">Additional Details / Notes</label>
+                                <textarea id="message" rows="4" class="w-full bg-[#1a1d26] border border-neutral-800 focus:border-[#ff6b00] text-white px-4 py-3 rounded-xl outline-none transition-colors text-sm" placeholder="Describe any sounds, dashboard lights, or specific concerns..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 accent-gradient text-white font-bold rounded-xl shadow-lg shadow-[#ff6b00]/30 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                                <span>REQUEST SERVICE</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+
+                            <p class="text-center text-xs text-neutral-500 pt-2">
+                                Prefer to speak directly? <a href="tel:6462874848" class="text-[#ff6b00] font-semibold hover:underline">CALL (646) 287-4848</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="py-20 bg-[#12141c] border-t border-neutral-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b00]/10 border border-[#ff6b00]/20 text-[#ff6b00] text-xs font-semibold uppercase tracking-wider">
+                    PROUDLY SERVING THE BRONX
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-bold font-heading tracking-tight text-white">
+                    LOCAL AUTOMOTIVE EXPERTS
+                </h2>
+                <p class="text-neutral-400 text-base max-w-2xl mx-auto">
+                    Looking for dependable auto repair and maintenance in The Bronx? Jose Auto Solution is here to help with routine service, repairs, inspections, and more.
+                </p>
+
+                <!-- Map / Location Card Placeholder -->
+                <div class="max-w-3xl mx-auto mt-8 rounded-2xl overflow-hidden border border-neutral-800 bg-[#1a1d26] p-8 sm:p-12 shadow-2xl relative">
+                    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#ff6b00_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                    <div class="relative z-10 space-y-4">
+                        <div class="w-16 h-16 rounded-2xl bg-[#ff6b00]/10 border border-[#ff6b00]/30 text-[#ff6b00] flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="map-pin" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-heading text-white">JOSE AUTO SOLUTION</h3>
+                        <p class="text-neutral-400 text-sm">The Bronx, New York</p>
+                        <div class="pt-4">
+                            <a href="tel:6462874848" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl accent-gradient text-white font-semibold text-sm shadow-lg shadow-[#ff6b00]/20">
+                                <i data-lucide="phone-call" class="w-4 h-4"></i>
+                                <span>CALL FOR SERVICE</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="py-24 bg-[#0b0c10] border-t border-neutral-800 text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
+                <h2 class="text-4xl sm:text-6xl font-bold font-heading tracking-tight text-white">
+                    Keep Your Car Ready for the Road.
+                </h2>
+                <p class="text-neutral-400 text-lg max-w-xl mx-auto">
+                    Professional automotive service. Straightforward communication. Customer satisfaction comes first.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="tel:6462874848" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl accent-gradient text-white font-bold text-lg shadow-xl shadow-[#ff6b00]/30 hover:scale-[1.02] transition-transform">
+                        <i data-lucide="phone-call" class="w-5 h-5"></i>
+                        <span>CALL JOSE AUTO SOLUTION: 646-287-4848</span>
+                    </a>
+                </div>
+                <div class="pt-2">
+                    <a href="#contact" class="text-neutral-400 hover:text-[#ff6b00] text-sm font-semibold inline-flex items-center gap-1 transition-colors">
+                        <span>Or request service online</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#12141c] border-t border-neutral-800 text-neutral-400 text-sm py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center text-white">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                        </div>
+                        <span class="font-heading font-bold text-white text-lg">JOSE AUTO SOLUTION</span>
+                    </div>
+                    <p class="text-neutral-400 text-xs leading-relaxed">
+                        Reliable automotive repair and maintenance serving drivers in The Bronx, NY.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-white text-sm uppercase tracking-wider">Services</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">Brake Service</a></li>
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">Oil Changes</a></li>
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">Auto Repair</a></li>
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">Emissions Inspection</a></li>
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">Electrical Services</a></li>
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">General Maintenance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-white text-sm uppercase tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#home" class="hover:text-[#ff6b00] transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-[#ff6b00] transition-colors">About</a></li>
+                        <li><a href="#services" class="hover:text-[#ff6b00] transition-colors">Services</a></li>
+                        <li><a href="#why-us" class="hover:text-[#ff6b00] transition-colors">Why Us</a></li>
+                        <li><a href="#reviews" class="hover:text-[#ff6b00] transition-colors">Reviews</a></li>
+                        <li><a href="#contact" class="hover:text-[#ff6b00] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div class="space-y-4">
+                    <h4 class="font-heading font-bold text-white text-sm uppercase tracking-wider">Contact</h4>
+                    <p class="text-xs text-neutral-400">The Bronx, NY</p>
+                    <p class="text-xs font-bold text-white font-heading text-base">(646) 287-4848</p>
+                    <div>
+                        <a href="tel:6462874848" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl accent-gradient text-white text-xs font-semibold shadow-lg">
+                            <span>CALL NOW</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
+                <p>© 2026 Jose Auto Solution. All Rights Reserved.</p>
+                <p>Auto Repair & Maintenance | The Bronx, NY</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Mobile Call Button -->
+    <div class="fixed bottom-6 right-6 z-40 sm:hidden">
+        <a href="tel:6462874848" class="flex items-center justify-center w-14 h-14 rounded-full accent-gradient text-white shadow-2xl shadow-[#ff6b00]/50 hover:scale-110 transition-transform">
+            <i data-lucide="phone-call" class="w-6 h-6"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript & Interactivity -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Select Service helper for service cards
+        function selectService(serviceName) {
+            const selectEl = document.getElementById('service-need');
+            if (selectEl) {
+                for (let i = 0; i < selectEl.options.length; i++) {
+                    if (selectEl.options[i].value === serviceName) {
+                        selectEl.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const modal = document.getElementById('notification-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+
+            modalTitle.textContent = `Thank you, ${name}!`;
+            modalMessage.textContent = "Your service request has been received by Jose Auto Solution. We will review your vehicle details and call you shortly at the number provided.";
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('#modal-content').classList.remove('scale-95');
+            }, 10);
+
+            document.getElementById('service-form').reset();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('notification-modal');
+            modal.classList.add('opacity-0');
+            modal.querySelector('#modal-content').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modal on click outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('notification-modal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
